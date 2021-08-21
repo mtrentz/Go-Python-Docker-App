@@ -2,7 +2,7 @@ version: '3'
 services:
   testserver:
     build:
-      dockerfile: ./docker/analyser.dockerfile
+      dockerfile: ./docker/server.dockerfile
       context: .
     image: mtrentz/testserver
     container_name: testserver
@@ -12,6 +12,19 @@ services:
       - "8001:8001"
     networks:
       - net
+      
+  testclient:
+    build:
+      dockerfile: ./docker/client.dockerfile
+      context: .
+    image: mtrentz/testclient
+    container_name: testclient
+    volumes:
+      - ./files:/app/files
+    networks:
+      - net
+    depends_on:
+      - "testserver"
 
 networks:
   net:
