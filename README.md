@@ -11,5 +11,5 @@ The points of this is just to test docker networks and how I could get two progr
 To run this app:
 ```
 docker-compose build
-docker compose up
+docker-compose up
 ```
