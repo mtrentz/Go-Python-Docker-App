@@ -27,7 +27,7 @@ class _RequestHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         length = int(self.headers.get('content-length'))
         message = json.loads(self.rfile.read(length))
-        write_to_txt(message['path'])
+        write_to_txt(message['msg'])
         self._set_headers()
         self.wfile.write(json.dumps({'success': True}).encode('utf-8'))
 
@@ -50,5 +50,5 @@ def run_server():
 if __name__ == '__main__':
     run_server()
 
-    # POST
-    # curl -d '{"path":"testpath"}' -X POST localhost:8001
+    # POST with cURL
+    # curl -d '{"msg":"test_msg"}' -X POST localhost:8001

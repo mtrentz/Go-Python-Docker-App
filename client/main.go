@@ -29,7 +29,8 @@ func main() {
 		time.Sleep(time.Second)
 		randomStr := generator()
 
-		var jsonStr = []byte(fmt.Sprintf(`{"path":"%s"}`, randomStr))
+		// Sends a JSON with only one key:val pair. The key that Python app is waiting for is 'msg'.
+		var jsonStr = []byte(fmt.Sprintf(`{"msg":"%s"}`, randomStr))
 
 		// POST
 		url := "http://testserver:8001"
