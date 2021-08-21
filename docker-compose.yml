@@ -1,0 +1,18 @@
+version: '3'
+services:
+  testserver:
+    build:
+      dockerfile: ./docker/analyser.dockerfile
+      context: .
+    image: mtrentz/testserver
+    container_name: testserver
+    volumes:
+      - ./files:/app/files
+    ports:
+      - "8001:8001"
+    networks:
+      - net
+
+networks:
+  net:
+    driver: bridge

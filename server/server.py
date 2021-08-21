@@ -2,9 +2,14 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 from http import HTTPStatus
 import json
 
-# Yoinked the code from this comment https://gist.github.com/nitaku/10d0662536f37a087e1b#gistcomment-3375622
-# which got it from somewhere else
 
+def write_to_txt(text):
+    with open('../files/test.txt', 'a+') as f:
+        f.write(text)
+        f.write('\n')
+
+# Got the code from this comment https://gist.github.com/nitaku/10d0662536f37a087e1b#gistcomment-3375622
+# which got it from somewhere else
 class _RequestHandler(BaseHTTPRequestHandler):
     def _set_headers(self):
         self.send_response(HTTPStatus.OK.value)
@@ -17,14 +22,12 @@ class _RequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         self._set_headers()
         # self.wfile.write(json.dumps(_g_posts).encode('utf-8'))
-        self.wfile.write('Hi'.encode())
+        self.wfile.write('GET success'.encode())
 
     def do_POST(self):
         length = int(self.headers.get('content-length'))
         message = json.loads(self.rfile.read(length))
-        # message['date_ms'] = int(time.time()) * 1000
-        # _g_posts.append(message)
-        print(message['path'])
+        write_to_txt(message['path'])
         self._set_headers()
         self.wfile.write(json.dumps({'success': True}).encode('utf-8'))
 
@@ -46,3 +49,6 @@ def run_server():
 
 if __name__ == '__main__':
     run_server()
+
+    # POST
+    # curl -d '{"path":"testpath"}' -X POST localhost:8001
