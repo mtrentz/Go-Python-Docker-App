@@ -40,8 +40,8 @@ func main() {
 			var jsonStr = []byte(fmt.Sprintf(`{"msg":"%s"}`, randomStr))
 
 			// POST
-			// url := "http://testserver:8001"
-			url := "http://localhost:8001"
+			url := "http://testserver:8001"
+			// url := "http://localhost:8001"
 			req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
 			if err != nil {
 				panic(err)
