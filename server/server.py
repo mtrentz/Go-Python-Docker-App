@@ -1,9 +1,12 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from http import HTTPStatus
+from pathlib import Path
+import time
 import json
 
 
 def write_to_txt(text):
+    Path('../files/').mkdir(parents=True, exist_ok=True)
     with open('../files/test.txt', 'a+') as f:
         f.write(text)
         f.write('\n')
@@ -29,6 +32,7 @@ class _RequestHandler(BaseHTTPRequestHandler):
         message = json.loads(self.rfile.read(length))
         write_to_txt(message['msg'])
         self._set_headers()
+        time.sleep(3)
         self.wfile.write(json.dumps({'success': True}).encode('utf-8'))
 
     def do_OPTIONS(self):
