@@ -2,7 +2,7 @@
 
 A mock application that puts together some code written in Python and Golang using docker.
 
-In Go there is a simple application that sends a random message as a POST request to a bare bones python server.
+In Go there is a simple application that sends a random message as a POST request to a simpe FastAPI server.
 
 The server then reads the JSON request and writes the message to a file.
 
